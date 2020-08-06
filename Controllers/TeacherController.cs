@@ -27,7 +27,7 @@ namespace SmartSchool_WebAPI.Controllers
 
                 return Ok(result);
             } catch (Exception ex) {
-                return BadRequest($"Error: {ex.Message}");
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
         }
 
@@ -37,12 +37,12 @@ namespace SmartSchool_WebAPI.Controllers
                 var result = await _repository.GetTeacherAsyncById(teacherId, true);
 
                 if(result == null) {
-                    return NotFound("Professor não encontrado!");
+                    return NotFound(new { message = "Professor não encontrado!" });
                 }
 
                 return Ok(result);
             } catch(Exception ex) {
-                return BadRequest($"Error: {ex.Message}");
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
         }
 
@@ -52,12 +52,12 @@ namespace SmartSchool_WebAPI.Controllers
                 var result = await _repository.GetTeachersAsyncByStudentId(studentId, false);
 
                 if(result == null) {
-                    return NotFound("Professores não encontrado!");
+                    return NotFound(new { message = "Professores não encontrado!" });
                 }
 
                 return Ok(result);
             } catch(Exception ex) {
-                return BadRequest($"Error: {ex.Message}");
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
         }
 
@@ -67,10 +67,10 @@ namespace SmartSchool_WebAPI.Controllers
                 _repository.Add(model);
 
                 if(await _repository.SaveChangesAsync()) {
-                    return Ok($"Professor adicionado com sucesso: {model}");
+                    return Ok(model);
                 }
             } catch(Exception ex) {
-                return BadRequest($"Error: {ex.Message}");
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
 
             return BadRequest();
@@ -82,7 +82,7 @@ namespace SmartSchool_WebAPI.Controllers
                 var result = await _repository.GetTeacherAsyncById(teacherId, false);
 
                 if(result == null) {
-                    return NotFound("Professores não encontrado!");
+                    return NotFound(new { message = "Professores não encontrado!" });
                 }
 
                 _repository.Update(model);
@@ -91,7 +91,7 @@ namespace SmartSchool_WebAPI.Controllers
                     return Ok(result);
                 }
             } catch(Exception ex) {
-                return BadRequest($"Error: {ex.Message}");
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
 
             return BadRequest();
@@ -103,7 +103,7 @@ namespace SmartSchool_WebAPI.Controllers
                 var result = await _repository.GetTeacherAsyncById(teacherId, false);
 
                 if(result == null) {
-                    return NotFound("Professores não encontrado!");
+                    return NotFound(new { message = "Professores não encontrado!" });
                 }
 
                 _repository.Delete(result);
@@ -112,7 +112,7 @@ namespace SmartSchool_WebAPI.Controllers
                     return Ok(result);
                 }
             } catch(Exception ex) {
-                return BadRequest($"Error: {ex.Message}");
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
 
             return BadRequest();

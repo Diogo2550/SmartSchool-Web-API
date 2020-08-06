@@ -57,7 +57,7 @@ namespace SmartSchool_WebAPI.Controllers
                 _repository.Add(model);
 
                 if(await _repository.SaveChangesAsync()) {
-                    return Ok($"Aluno adicionado com sucesso: {model}");
+                    return Ok(model);
                 }
             } catch(Exception ex) {
                 return BadRequest($"Error: {ex.Message}");
@@ -78,7 +78,7 @@ namespace SmartSchool_WebAPI.Controllers
                 _repository.Update(model);
 
                 if(await _repository.SaveChangesAsync()) {
-                    return Ok($"Aluno atualizado com sucesso: {model}");
+                    return Ok(model);
                 }
             } catch(Exception ex) {
                 return BadRequest($"Error: {ex.Message}");
@@ -99,7 +99,7 @@ namespace SmartSchool_WebAPI.Controllers
                 _repository.Delete(student);
 
                 if(await _repository.SaveChangesAsync()) {
-                    return Ok($"Aluno removido com sucesso: {student}");
+                    return Ok(student);
                 }
             } catch(Exception ex) {
                 return BadRequest($"Error: {ex.Message}");
